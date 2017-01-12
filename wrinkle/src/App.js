@@ -3,13 +3,47 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+const container = {
+  margin: '0 10% 0 10%',
+  backgroundcolor: '#4CAF50'
+};
+const gridStyle = {
+  // width: '90%',
+  border: 'solid 1px white',
+  margin: '0 5% 0 5%'
+};
+
+function InRowsDrawCols(props){
+  return(
+      <td className="block">1</td>
+  );
+}
+
+function DrawRowsOnGrid(props){
+  return(
+    <tr>
+      <InRowsDrawCols />
+    </tr>
+  );
+}
+
+function DrawGrid(props){
+  return(
+    <table style={gridStyle}>
+      <tbody>
+        <DrawRowsOnGrid />
+      </tbody>
+    </table>
+  );
+}
 
 class Wrinkle extends Component {
   render() {
     return(
       <div className="Wrinkle">
-        <div className="Wrinkle-grid">
-          
+        <h1>Let the ripple, <code>wrinkle</code>.</h1>
+        <div style={container} className="Wrinkle-grid">
+          <DrawGrid />
         </div>
       </div>
     );
@@ -34,5 +68,3 @@ class App extends Component {
   }
 }
 export default App;
-
-

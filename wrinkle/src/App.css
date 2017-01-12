@@ -27,6 +27,39 @@
   text-align: center;
 }
 
+table, tbody, tr, td{
+  border: solid 1px;
+  border-color: white;
+}
+
+td{
+  height: 50px;
+  width: 50px;
+}
+
 .Wrinkle {
+
+}
+
+.Wrinkle-grid {
+  margin: 0 10% 0 10%;
+  background-color: #4CAF50;
+}
+
+.Wrinkle-table {
+  margin: 0 20px 0 20px;
+}
+
+.Wrinkle-table > tbody {
+  align-content: center;
+  
+}
+
+.Wrinkle-table > tbody > tr {
+}
+
+.Wrinkle-table > tbody > tr >td {
+  min-height: 20px;
+  min-width: 20px;
 
 }
