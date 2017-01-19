@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import logo from './logo.svg';
+
 import './App.css';
 
+import Grid from './Grid'
+
 const container = {
+  // backgroundColor: '#4CAF50',
   margin: '0 10% 0 10%',
-};
-const gridStyle = {
-  // width: '90%',
-  border: 'solid 1px white',
-  margin: '0 5% 0 5%'
 };
 
 function getRandomColor() {
@@ -21,37 +19,14 @@ function getRandomColor() {
   return color;
 }
 
-function WrinkleIt (e){
-  console.log('Wrinkle:',)
-}
-
-function InRowsDrawCols(props){
-  return(
-      <td style={{backgroundColor: getRandomColor()}} onClick={WrinkleIt}>1</td>
-  );
-}
-
-function DrawRowsOnGrid(props){
-  return(
-    <tr>
-      <InRowsDrawCols />
-      <InRowsDrawCols />
-      <InRowsDrawCols />
-    </tr>
-  );
-}
-
-function DrawGrid(props){
-  return(
-    <table style={gridStyle}>
-      <tbody>
-        <DrawRowsOnGrid />
-        <DrawRowsOnGrid />
-        <DrawRowsOnGrid />
-      </tbody>
-    </table>
-  );
-}
+// function InRowsDrawCols(props){
+//   return(
+//       <td 
+//       className="block" 
+//       style={{backgroundColor: getRandomColor()}} onClick={WrinkleIt}>
+//       </td>
+//   );
+// }
 
 function Header(props){
   return(
@@ -97,10 +72,9 @@ var Counter = React.createClass({
   },
 
   render: function (){
-
     return(
       <div>
-        <div style={container} className="Counter">
+        <div className="Counter">
           <div className="counter-text">Row count</div>
           <div className="counter-content">  
             <button className="counter-action decrement" onClick={this.decrementRow}>-</button>
@@ -108,7 +82,7 @@ var Counter = React.createClass({
             <button className="counter-action increment" onClick={this.incrementRow}>+</button> 
           </div>
         </div>
-        <div style={container} className="Counter">
+        <div className="Counter">
           <div className="counter-text">Column count</div>
           <div className="counter-content">
             <button className="counter-action decrement" onClick={this.decrementCol}>-</button>
@@ -119,36 +93,16 @@ var Counter = React.createClass({
       </div>
     );
   }
-
 });
-
-
-class Wrinkle extends Component {
-  render() {
-    return(
-      <div className="Wrinkle">
-        <div style={container} className="Wrinkle-grid">
-          <DrawGrid />
-        </div>
-      </div>
-    );
-  }
-}
 
 class App extends Component {
   render() {
     return (
       <div>
-        <div className="App">
-          <div className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Welcome to React</h2>
-          </div>
-        </div>
           <Header />
-        <div className="App-content">
+        <div style={container} className="App-content">
           <Counter />
-          <Wrinkle />
+          <Grid rows={3} cols={3} onBlockClick={(row, col) => { console.log('row= '+row+' col='+col) }} />
         </div>
       </div>
     );
