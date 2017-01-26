@@ -24,7 +24,7 @@ const Grid = ({ rows, cols, onBlockClick }) => {
 					onClick={() => {onBlockClick(row,col)} }
 					key={`block-${col}-${row}`}
 					style={{backgroundColor: getRandomColor()}}
-				>r{row}c{col}</div>
+				></div>
 			)
 		}
 
