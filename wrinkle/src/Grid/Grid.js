@@ -1,27 +1,38 @@
 import React from 'react';
-
 import './Grid.css';
 
-const Grid = ({ rows, cols, onBlockClick }) => {
-	const rowsFinal = [];
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++ ) {
+      color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
+const Grid = ({ rows, cols, onBlockClick }) => {
+	
+	const rowsFinal = [];
 	// create the rows
 	for (let row = 0; row < rows; row++){
 	  const rowFinal =[];
-		
 		// create the cols
 		for(let col = 0; col < cols; col++) {
 			rowFinal.push(
 				<div  
-					key={`block-${col}-${row}`} 
 					className="block"
-					onClick={() => { onBlockClick(row,col) }}
-				/>
-			)	
+					onClick={() => {onBlockClick(row,col)} }
+					key={`block-${col}-${row}`}
+					style={{backgroundColor: getRandomColor()}}
+				>r{row}c{col}</div>
+			)
 		}
 
 		rowsFinal.push(
-			<div className="row" key={`row-${row}`}>{rowFinal}</div>
+			<div 
+				className="row" 
+				key={`row-${row}`}
+				>{rowFinal}</div>
 		);
 	}
 	return (
@@ -33,4 +44,4 @@ const Grid = ({ rows, cols, onBlockClick }) => {
 	)
 }
 
-export default Grid;
+export default Grid

@@ -1,73 +1,64 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ReactDOM from 'react-dom';
 // import ReactDOM from 'react-dom';
-
 import './App.css';
-
 import Grid from './Grid'
 
 const container = {
-  // backgroundColor: '#4CAF50',
   margin: '0 10% 0 10%',
 };
 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++ ) {
-      color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+var Header = React.createClass({
+  propTypes: {
+  },
 
-// function InRowsDrawCols(props){
-//   return(
-//       <td 
-//       className="block" 
-//       style={{backgroundColor: getRandomColor()}} onClick={WrinkleIt}>
-//       </td>
-//   );
-// }
-
-function Header(props){
-  return(
+  render: function() {
+    return(
     <div className="App-content">
       <h1>Let the ripple, <code>wrinkle</code>.</h1>
     </div>
-  );
-}
+    );
+  }
+});
 
 var Counter = React.createClass({
 
-  propTypes: {},
+  propTypes: {
+  },
 
-  getInitialState: function() {
+  getInitialState: function(props) {
     return{
-      rowNumber: 1,
-      colNumber: 2,
+      rows: 3,
+      cols: 3,
+    }
+  },
+  
+  getDefaultProps: function (){
+    return{
     }
   },
 
-  incrementRow: function (){
+  incrementRow: function (props){
     this.setState({
-      rowNumber: (this.state.rowNumber + 1),
+      rows: (this.state.rows + 1),
     });
   },
 
-  decrementRow: function (){
+  decrementRow: function (props){
     this.setState({
-      rowNumber: (this.state.rowNumber - 1),
+      rows: (this.state.rows - 1),
     });
   },
 
-  incrementCol: function (){
+  incrementCol: function (props){
     this.setState({
-      colNumber: (this.state.colNumber + 1),
+      cols: (this.state.cols + 1),
     });
   },
 
-  decrementCol: function (){
+  decrementCol: function (props){
     this.setState({
-      colNumber: (this.state.colNumber - 1),
+      cols: (this.state.cols - 1),
     });
   },
 
@@ -78,7 +69,7 @@ var Counter = React.createClass({
           <div className="counter-text">Row count</div>
           <div className="counter-content">  
             <button className="counter-action decrement" onClick={this.decrementRow}>-</button>
-              <div className="counter-number">{this.state.rowNumber}</div>
+              <div className="counter-number">{this.state.rows}</div>
             <button className="counter-action increment" onClick={this.incrementRow}>+</button> 
           </div>
         </div>
@@ -86,7 +77,7 @@ var Counter = React.createClass({
           <div className="counter-text">Column count</div>
           <div className="counter-content">
             <button className="counter-action decrement" onClick={this.decrementCol}>-</button>
-              <div className="counter-number">{this.state.colNumber}</div>
+              <div className="counter-number">{this.state.cols}</div>
             <button className="counter-action increment" onClick={this.incrementCol}>+</button>
           </div> 
         </div>
@@ -95,17 +86,41 @@ var Counter = React.createClass({
   }
 });
 
-class App extends Component {
-  render() {
-    return (
+var App= React.createClass({
+  propTypes: {
+    title: React.PropTypes.string,
+  },
+
+  getDefaultProps: function () {
+    return{
+      title:"Wrinkle-ripple",
+      rows: 5,
+      cols: 5,
+    };
+  },
+
+  getInitialState: function () {
+    return{
+      
+    }
+  },
+
+  render: function () {
+    return(
       <div>
           <Header />
         <div style={container} className="App-content">
-          <Counter />
-          <Grid rows={3} cols={3} onBlockClick={(row, col) => { console.log('row= '+row+' col='+col) }} />
+          <Counter/>
+          <Grid 
+            rows={this.props.rows} 
+            cols={this.props.cols} 
+            onBlockClick={(row, col) => {console.log(`Row ${row} Col ${col}`)} } 
+          />
         </div>
       </div>
     );
   }
-}
+});
+
+ReactDOM.render(<App />, document.getElementById('root'));
 export default App;
